@@ -5,6 +5,8 @@ import mount from 'koa-mount';
 import { useKoaServer, Action } from 'routing-controllers';
 import { JwtUser } from './entities';
 import { verify } from 'jsonwebtoken';
+import { readdirSync } from 'fs';
+import { join } from 'path';
 
 dotenv.config();
 
@@ -61,7 +63,7 @@ export const server = () => {
   config(app);
 
   useKoaServer(app, {
-    controllers: [],
+    controllers: [join(__dirname, 'controllers', '*')],
     currentUserChecker: async (action: Action) => {
       const token = action.request.headers.authorization.replace(/^Bearer\s/, '');
 
