@@ -1,0 +1,13 @@
+**/.DS_STORE
+node_modules/
+build/
+tmp/
+temp/
+
+.env
+
+.vagrant/
+ubuntu*.log
+yarn-error.log
+
+.idea
