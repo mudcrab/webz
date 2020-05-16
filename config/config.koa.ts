@@ -3,7 +3,7 @@ import Koa from 'koa';
 import serve from 'koa-static';
 import mount from 'koa-mount';
 import { useKoaServer, Action } from 'routing-controllers';
-import { JwtUser } from './entities';
+import { JwtUser } from '../src/entities';
 import { verify } from 'jsonwebtoken';
 import { readdirSync } from 'fs';
 import { join } from 'path';
@@ -57,13 +57,21 @@ export const config = (app: Koa) => {
   }
 };
 
-export const server = () => {
+export const server = (controllersPath?: string) => {
+  const controllers = [join(__dirname, 'controllers', '*')];
+
+  if (controllersPath) {
+    controllers.push(join(controllersPath, '*'));
+  }
+
+  console.log(controllers);
+
   const app = new Koa();
 
   config(app);
 
   useKoaServer(app, {
-    controllers: [join(__dirname, 'controllers', '*')],
+    controllers,
     currentUserChecker: async (action: Action) => {
       const token = action.request.headers.authorization.replace(/^Bearer\s/, '');
 
