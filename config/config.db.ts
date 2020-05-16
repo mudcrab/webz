@@ -5,8 +5,8 @@ import config from '../knexfile';
 
 dotenv.config();
 
-export const startDb = () => {
-  const knex = Knex(config[process.env.NODE_ENV || 'development']);
+export const startDb = (c?: any) => {
+  const knex = Knex((c || config)[process.env.NODE_ENV || 'development']);
 
   if (process.env.NODE_ENV === 'production') {
     knex.migrate

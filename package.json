@@ -1,19 +1,20 @@
 {
-  "name": "@mudcrab/webz",
-  "version": "1.0.0",
+  "name": "@khv/webz",
+  "version": "1.0.5",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon .",
     "prod": "NODE_ENV=production node build/src/index.js",
-    "build": "yarn tsc && cp package.json build/package.json",
+    "build": "yarn tsc && cp package.json build/package.json && cp nodemon.json build/nodemon.json",
     "migrate:new": "knex migrate:make -x ts",
     "migrate": "knex migrate:latest",
     "migrate:win": "tsc && knex migrate:latest",
     "migrate:rollback": "tsc --outDir build/migrations migrations/*.ts && knex migrate:rollback",
     "test": "ava",
-    "pm2": "pm2 start processes.json --no-daemon"
+    "pm2": "pm2 start processes.json --no-daemon",
+    "pub": "yarn build ; cd build ; npm publish --access public"
   },
   "dependencies": {
     "@types/knex": "^0.16.1",
@@ -45,6 +46,17 @@
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.1"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.8.1",
+    "typedi": "^0.8.0",
+    "typescript": "^3.9.2",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
+    "objection": "^2.1.3",
+    "knex": "^0.21.1",
+    "nodemon": "^2.0.3"
   },
   "ava": {
     "extensions": [

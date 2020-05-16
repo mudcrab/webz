@@ -57,14 +57,16 @@ export const config = (app: Koa) => {
   }
 };
 
-export const server = (controllersPath?: string) => {
-  const controllers = [join(__dirname, 'controllers', '*')];
+export const server = (controllersPath?: string, enableSystemController = true) => {
+  const controllers = [];
+
+  if (enableSystemController) {
+    controllers.push(join(__dirname, '..', 'src', 'controllers', '*'));
+  }
 
   if (controllersPath) {
     controllers.push(join(controllersPath, '*'));
   }
-
-  console.log(controllers);
 
   const app = new Koa();
 
