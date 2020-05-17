@@ -1,13 +1,13 @@
 {
   "name": "@khv/webz",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon .",
     "prod": "NODE_ENV=production node build/src/index.js",
-    "build": "yarn tsc && cp package.json build/package.json && cp nodemon.json build/nodemon.json",
+    "build": "yarn tsc && cp package.json build/package.json && cp nodemon.json build/nodemon.json && cp tsconfig.json build/tsconfig.json",
     "migrate:new": "knex migrate:make -x ts",
     "migrate": "knex migrate:latest",
     "migrate:win": "tsc && knex migrate:latest",
